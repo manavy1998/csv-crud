@@ -1,0 +1,51 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Menu</th>
+      <th scope="col">M Btns</th>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each this.data.rows as |data row|}}
+    <tr>
+      <td><button {{on 'click' this.showPopper}} type="button" id="popper-button" class="btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+      <div id="tooltip" class="d-none" role="tooltip">
+        My tooltip
+        <div id="arrow" data-popper-arrow></div>
+      </div>
+      <td class="d-flex flex-column">
+        <button class="btn btn-primary" {{on 'click' this.addRowAbove}} data-row="{{row}}" type="button"> Add row above </button>
+        <button class="btn btn-danger" {{on 'click' this.deleteRow}} data-row="{{row}}" type="button"> Delete row </button>
+        <button class="btn btn-primary" {{on 'click' this.addRowBelow}} data-row="{{row}}" type="button"> Add row below </button>
+
+      </td>
+      <th scope="row">{{row}}</th>
+      {{#each-in data as |key value|}}
+        <td {{on 'click' this.focus}}>
+          <Input {{on 'keydown' this.cellKeyPress}} data-row="{{row}}" data-col="{{key}}" @value={{value}} @type="text"></Input>
+          </td>
+      {{/each-in}}
+    </tr>
+    {{/each}}
+    <tr>
+      <th scope="row">2</th>
+      <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+{{this.onLoad}}
+{{yield}}
+
