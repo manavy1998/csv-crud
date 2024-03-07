@@ -79,6 +79,13 @@ export default class CsvGridComponent extends Component {
     } else if (e.key === 'Escape') {
       console.log(e.target.row);
       console.log('Enter key pressed');
+
+      this.reloadData();
+    } else if (e.key === 'Tab') {
+      let row = e.target.dataset.row;
+      let col = e.target.dataset.col;
+      this.saveCell(row, col, e.target.value);
+      console.log(this.data);
     }
   }
 
