@@ -7,5 +7,7 @@ module.exports = function (defaults) {
     // Add options here
   });
 
+  // app.import('vendor/data-interface.js');
+
   return app.toTree();
 };
