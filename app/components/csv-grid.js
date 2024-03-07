@@ -71,17 +71,23 @@ export default class CsvGridComponent extends Component {
 
   @action
   cellKeyPress(e) {
-    if (e.key === 'Enter') {
+    //key = Enter
+    if (e.keyCode === 13) {
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
       this.saveCell(row, col, e.target.value);
       console.log(this.data);
-    } else if (e.key === 'Escape') {
-      console.log(e.target.row);
-      console.log('Enter key pressed');
-
-      this.reloadData();
-    } else if (e.key === 'Tab') {
+    }
+    //Key = Escape
+    else if (e.keyCode === 27) {
+      console.log('Escape key pressed');
+      let row = e.target.dataset.row;
+      let col = e.target.dataset.col;
+      e.target.value = this.getCellData(row, col);
+      document.activeElement.blur();
+    }
+    //Key = Tab
+    else if (e.keyCode === 9) {
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
       this.saveCell(row, col, e.target.value);
@@ -91,6 +97,10 @@ export default class CsvGridComponent extends Component {
 
   saveCell(row, col, cellData) {
     this.data.rows[row][col] = cellData;
+  }
+
+  getCellData(row, col) {
+    return this.data.rows[row][col];
   }
 
   addRow(index) {
