@@ -28,7 +28,7 @@
       <th scope="row">{{row}}</th>
       {{#each-in data as |key value|}}
         <td {{on 'click' this.focus}}>
-          <Input {{on 'keydown' this.cellKeyPress}} data-row="{{row}}" data-col="{{key}}" @value={{value}} @type="text"></Input>
+          <Input {{on 'keydown' this.cellKeyPress}} {{on 'blur' this.cellBlur}} data-row="{{row}}" data-col="{{key}}" @value={{value}} @type="text"></Input>
           </td>
       {{/each-in}}
     </tr>

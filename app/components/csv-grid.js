@@ -95,6 +95,14 @@ export default class CsvGridComponent extends Component {
     }
   }
 
+  @action
+  cellBlur(e) {
+    let row = e.target.dataset.row;
+    let col = e.target.dataset.col;
+    this.saveCell(row, col, e.target.value);
+    console.log(this.data);
+  }
+
   saveCell(row, col, cellData) {
     this.data.rows[row][col] = cellData;
   }
@@ -181,5 +189,10 @@ export default class CsvGridComponent extends Component {
         { name: 'eventListeners', enabled: false },
       ],
     }));
+  }
+
+  @action
+  someAction() {
+    console.log('action called');
   }
 }
