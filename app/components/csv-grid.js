@@ -35,7 +35,7 @@ export default class CsvGridComponent extends Component {
       {
         question: {
           data: 'Mark',
-          checked: false,
+          checked: true,
         },
         option_1: {
           data: 'Mark',
@@ -132,6 +132,7 @@ export default class CsvGridComponent extends Component {
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
       this.saveCellValue(row, col, 'data', e.target.value);
+      document.activeElement.blur();
       console.log(this.data);
     }
     //Key = Escape
@@ -149,6 +150,15 @@ export default class CsvGridComponent extends Component {
       this.saveCellValue(row, col, 'data', e.target.value);
       console.log(this.data);
     }
+  }
+
+  @action
+  cellCheckBox(e) {
+    let row = e.target.dataset.row;
+    let col = e.target.dataset.col;
+    this.saveCellValue(row, col, 'checked', e.target.value);
+
+    console.log(this.data);
   }
 
   @action
