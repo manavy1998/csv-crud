@@ -130,9 +130,12 @@ export default class CsvGridComponent extends Component {
 
   @action
   deleteRow(e) {
-    console.log('gerte');
     let row = e.target.dataset.row;
     this.data.rows.splice(row, 1);
+    console.log(this.data.rows.length);
+    if (this.data.rows.length < 1) {
+      this.addRow(0);
+    }
     this.reloadData();
   }
 
