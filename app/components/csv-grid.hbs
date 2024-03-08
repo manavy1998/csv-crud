@@ -5,9 +5,11 @@
       <th scope="col">Menu</th>
       <th scope="col">M Btns</th>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Question</th>
+      <th scope="col">Option 1</th>
+      <th scope="col">Option 2</th>
+      <th scope="col">Option 3</th>
+      <th scope="col">Option 4</th>
     </tr>
   </thead>
   <tbody>
@@ -26,24 +28,14 @@
 
       </td>
       <th scope="row">{{row}}</th>
-      {{#each-in data as |key value|}}
+      {{#each-in data as |key cell|}}
         <td {{on 'click' this.focus}}>
-          <Input {{on 'keydown' this.cellKeyPress}} {{on 'blur' this.cellBlur}} data-row="{{row}}" data-col="{{key}}" @value={{value}} @type="text"></Input>
+          <Input {{on 'keydown' this.cellKeyPress}} {{on 'blur' this.cellBlur}} data-row="{{row}}" data-col="{{key}}" @value={{cell.data}} @type="textarea"></Input>
           </td>
       {{/each-in}}
     </tr>
     {{/each}}
-    <tr>
-      <th scope="row">2</th>
-      <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+
   </tbody>
 </table>
 {{this.onLoad}}

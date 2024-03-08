@@ -30,24 +30,80 @@ class RephraseData {
 
 export default class CsvGridComponent extends Component {
   @tracked data = {
-    columns: ['first', 'last', 'handle'],
+    columns: ['question', 'option_1', 'option_2', 'option_3', 'option_4'],
     rows: [
       {
-        first: 'Mark1',
-        last: 'Last',
-        handle: '@mdo',
+        question: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_1: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_2: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_3: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_4: {
+          data: 'Mark',
+          checked: false,
+        },
       },
       {
-        first: 'Mark2',
-        last: 'Last',
-        handle: '@mdo',
+        question: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_1: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_2: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_3: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_4: {
+          data: 'Mark',
+          checked: false,
+        },
       },
       {
-        first: 'Mark3',
-        last: 'Last',
-        handle: '@mdo',
+        question: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_1: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_2: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_3: {
+          data: 'Mark',
+          checked: false,
+        },
+        option_4: {
+          data: 'Mark',
+          checked: false,
+        },
       },
     ],
+  };
+
+  @tracked cell = {
+    data: '',
+    checked: false,
   };
 
   @tracked popperInstance;
@@ -75,7 +131,7 @@ export default class CsvGridComponent extends Component {
     if (e.keyCode === 13) {
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
-      this.saveCell(row, col, e.target.value);
+      this.saveCellValue(row, col, 'data', e.target.value);
       console.log(this.data);
     }
     //Key = Escape
@@ -83,14 +139,14 @@ export default class CsvGridComponent extends Component {
       console.log('Escape key pressed');
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
-      e.target.value = this.getCellData(row, col);
+      e.target.value = this.getCellValue(row, col, 'data');
       document.activeElement.blur();
     }
     //Key = Tab
     else if (e.keyCode === 9) {
       let row = e.target.dataset.row;
       let col = e.target.dataset.col;
-      this.saveCell(row, col, e.target.value);
+      this.saveCellValue(row, col, 'data', e.target.value);
       console.log(this.data);
     }
   }
@@ -99,22 +155,30 @@ export default class CsvGridComponent extends Component {
   cellBlur(e) {
     let row = e.target.dataset.row;
     let col = e.target.dataset.col;
-    this.saveCell(row, col, e.target.value);
+    this.saveCellValue(row, col, 'data', e.target.value);
     console.log(this.data);
   }
 
-  saveCell(row, col, cellData) {
-    this.data.rows[row][col] = cellData;
+  saveCell(row, col, cell) {
+    this.data.rows[row][col] = cell;
   }
 
-  getCellData(row, col) {
+  saveCellValue(row, col, key, value) {
+    this.data.rows[row][col][key] = value;
+  }
+
+  getCell(row, col) {
     return this.data.rows[row][col];
+  }
+
+  getCellValue(row, col, key) {
+    return this.data.rows[row][col][key];
   }
 
   addRow(index) {
     let jsonObject = {};
     this.data.columns.forEach((key, index) => {
-      jsonObject[key] = '';
+      jsonObject[key] = JSON.parse(JSON.stringify(this.cell));
     });
 
     this.data.rows.splice(index, 0, jsonObject);
